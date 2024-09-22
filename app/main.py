@@ -15,12 +15,12 @@ def handle_client(client):
     client.close()
 
 def main():
-    server = socket.create_server(("localhost", 9092), reuse_port=True)
-    server.accept() # wait for client
-
+    server = socket.create_server(("localhost", 9092))  # Removed reuse_port=True for simplicity
+    server.listen(1)  #Ensure the server is listening for connections
+    
     while True:
-        client,addr=server.accept()
-        handle_client(client)
+        client, addr = server.accept()  # Accept connection
+        handle_client(client)  # Handle the connected client
 
 if __name__ == "__main__":
     main()
